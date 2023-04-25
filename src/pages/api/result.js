@@ -4,7 +4,7 @@ import * as fs from 'fs'
 
 const getData=async ()=>{
 
-    const res  = fs.readFileSync(`inputs.json` , "utf8")
+    const res  = fs.readFileSync(`/tmp/inputs.json` , "utf8")
     return JSON.parse(res)
   }
 
