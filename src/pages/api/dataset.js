@@ -12,7 +12,7 @@ export default async function dataset(req, res) {
  
   if(req.method == "POST"){
     const data = JSON.parse(req.body)
-    createTable(db,"dataset",data[0],false)
+    createTable(db,"dataset",data[0],false,["id"])
     insertRows(db,"dataset",data)
     const response = await getResults(db,"dataset","")
     res.status(200).json(response)
