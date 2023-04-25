@@ -1,7 +1,7 @@
 import * as tf from '@tensorflow/tfjs'
 import _ from 'lodash'
 import * as fs from 'fs'
-
+import { dataBase, getResults } from './dbcontroller'
 const getData=async ()=>{
 
     const res  = fs.readFileSync(`/tmp/inputs.json` , "utf8")
@@ -59,12 +59,12 @@ async function TrainAndPredict(arr){
   
 
 export default async function getPred(req, res){
-    /*const db = dataBase(":memory:").connection*/
-    const dataset = await getData()
-
+    const db = dataBase(":memory:").connection
+    const dataset = await getResults(db, "dataset","")
+    console.log(dataset)
     const result = await TrainAndPredict(dataset)
 
     res.status(200).json(result)
-    db.close()
+
 
 }
