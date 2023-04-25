@@ -12,7 +12,7 @@ export default async function dataset(req, res) {
  
   if(req.method == "POST"){
     const data = JSON.parse(req.body)
-    createTable(db,"dataset",data[0],false,["created_at"])
+    createTable(db,"dataset",data[0],false)
     insertRows(db,"dataset",data)
     const response = await getResults(db,"dataset","")
     res.status(200).json(response)
@@ -66,7 +66,7 @@ export default async function dataset(req, res) {
       //model.compile({ optimizer: tf.train.adam(0.0031441251), loss: 'meanSquaredError' });
     
       // Treine o modelo com cada lote.
-      await model.fit(data, labels, {epochs: 200});
+      await model.fit(data, labels, {epochs: 72});
      
       // Use o modelo para fazer previsões.
       const testData = tf.tensor2d([arr.slice(0,5).map(e =>parseFloat(e.crash_point))]);
