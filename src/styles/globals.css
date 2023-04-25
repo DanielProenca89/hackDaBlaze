@@ -105,3 +105,37 @@ a {
     color-scheme: dark;
   }
 }
+
+
+@keyframes standBg { 
+  0% {background: linear-gradient(360deg, rgb(255, 255, 255), rgb(0,204,255),rgb(124, 2, 104))}
+  10% {background: linear-gradient(288deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104))}
+  20% {background: linear-gradient(216deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104))} 
+  30% {background: linear-gradient(144deg, rgb(255, 255, 255), rgb(0,204,255),rgba(124, 2, 104))} 
+  40% {background: linear-gradient(72deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104))} 
+  50% {background: linear-gradient(0deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104));} 
+  60% {background: linear-gradient(-72deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104));} 
+  70% {background: linear-gradient(-144deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104));}
+  80% {background: linear-gradient(-216deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104));}
+  90% {background: linear-gradient(-288deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104));}
+  100% {background: linear-gradient(-360deg, rgb(255, 255, 255), rgb(0,204,255), rgba(124, 2, 104))}
+ }
+
+
+
+.buttonStart{
+  cursor: pointer;
+  transition: all .2s ease-in-out
+}
+.buttonStart:hover{
+  transform: scale(1.1)
+}
+
+.loading{
+  cursor:not-allowed;
+  animation: standBg .3s ease-in-out infinite;
+}
+
+.loading:hover{
+  transform: scale(1)
+}

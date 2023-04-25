@@ -5,6 +5,8 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  background: rgb(20,0,36);
+background: linear-gradient(0deg, rgba(20,0,36,1) 0%, rgba(28,2,22,1) 90%, rgba(196,0,255,1) 100%);
 }
 
 .description {
