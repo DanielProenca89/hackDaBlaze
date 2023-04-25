@@ -11,12 +11,14 @@ export default async function dataset(req, res) {
     insertRows(db,"dataset",data)
     const response = await getResults(db,"dataset","")
     res.status(200).json(response)
+    db.close()
     
     }
 
 
   if(req.method == "GET"){
     const response = await getResults(db,"dataset","")
+    db.close()
     res.status(200).json(response)
   }
   

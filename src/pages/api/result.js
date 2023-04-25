@@ -59,5 +59,6 @@ export default async function getPred(req, res){
     const result = await TrainAndPredict(dataset)
 
     res.status(200).json(result)
+    db.close()
 
 }
