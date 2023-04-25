@@ -1,6 +1,12 @@
 import * as tf from '@tensorflow/tfjs'
-import { dataBase, getResults } from './dbcontroller';
 import _ from 'lodash'
+import * as fs from 'fs'
+
+const getData=async ()=>{
+
+    const res  = fs.readFileSync(`inputs.json` , "utf8")
+    return JSON.parse(res)
+  }
 
 function chunkArray(arr, size) {
     const chunks = [];
@@ -53,8 +59,8 @@ async function TrainAndPredict(arr){
   
 
 export default async function getPred(req, res){
-    const db = dataBase("db").connection
-    const dataset = await getResults(db, "dataset", "")
+    /*const db = dataBase(":memory:").connection*/
+    const dataset = await getData()
 
     const result = await TrainAndPredict(dataset)
 
