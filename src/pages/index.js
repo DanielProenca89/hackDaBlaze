@@ -16,7 +16,7 @@ export default function Home() {
 
   const handleClick = async ()=>{
     setLoadingClass("loading")
-    const res = await fetch('api/result')
+    const res = await fetch('api/dataset')
     const json = await res.json()
     const float  = parseFloat(json.response).toFixed(2)
     setResult(float)
