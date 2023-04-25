@@ -3,12 +3,12 @@ import { dataBase, createTable, getResults, insertRows } from './dbcontroller';
 import * as tf from '@tensorflow/tfjs'
 import _ from 'lodash'
 
-const db = dataBase(":memory:").connection
 
 
 export default async function dataset(req, res) {
 
-  
+  const db = dataBase("/tmp/db").connection
+
  
   if(req.method == "POST"){
     const data = JSON.parse(req.body)
