@@ -23,10 +23,13 @@ export default async function dataset(req, res) {
 
 const getApiData= async (startDate, endDate, page=1)=>{
     try{
-    const res = await fetch(`https://blaze.com/api/crash_games/history?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`,{credentials: "include"})
+    const res = await fetch(`https://hackdocrash.netlify.app/blaze?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`,{credentials: "include"})
     const json = await res.json()
+    console.log(json)
     return json.records
+
     }catch(error){
+      console.log(error)
         return error
     }
 }
