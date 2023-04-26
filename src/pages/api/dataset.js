@@ -26,8 +26,8 @@ const getApiData= async (startDate, endDate, page=1)=>{
     const res = await fetch(`https://blaze.com/api/crash_games/history?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`,{credentials: "include"})
     const json = await res.json()
     return json.records
-    }catch{
-        return []
+    }catch(error){
+        return error
     }
 }
 
@@ -110,7 +110,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
     const dataset = await getApiData(now, now)
     const result = await TrainAndPredict(dataset)
 
-    res.status(200).json(result)
+    res.send(result)
     }catch(error){
     res.send(error)
     }
