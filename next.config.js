@@ -3,7 +3,7 @@ module.exports = () => {
     return [
       {
         source: "/blaze",
-        destination: "https://blaze.com/api/crash_games/history",
+        destination: "https://de.hideproxy.me/includes/process.php?action=update"
       },
     ];
   };
