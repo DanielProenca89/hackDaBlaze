@@ -20,7 +20,7 @@ export default async function dataset(req, res) {
 
     res.status(200).json(response)
     toJsonFile(data, "inputs")*/
-    
+    db.close()
     }
 
 
@@ -104,6 +104,7 @@ export default async function dataset(req, res) {
     const result = await TrainAndPredict(dataset)
 
     res.status(200).json(result)
+    db.close()
 
   }
   
