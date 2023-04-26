@@ -3,8 +3,6 @@ import { dataBase, createTable, getResults, insertRows } from './dbcontroller';
 import * as tf from '@tensorflow/tfjs'
 import _ from 'lodash'
 
-
-
 export default async function dataset(req, res) {
 
   /*const db = dataBase("/tmp/db").connection
