@@ -3,6 +3,8 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
+
+
 const inter = Inter({ subsets: ['latin'] })
 
 
@@ -40,11 +42,13 @@ export default function Home() {
       <div style={{display:"grid", alignContent:"center", justifyContent:"center"}}>
         <h1 style={{color:"aliceblue", textAlign:"center", top:0}}>Crash Hack</h1>
         <div style={{textAlign:"center",  padding:"1em" ,width:"100%", height:"100%", display:"grid"}}>
-        <h1 style={{color:"green", fontSize:"5em", color:"aliceblue"}}>{result}X</h1>
+        <h1 style={{color:"green", fontSize:"5em", color:"aliceblue"}}>{result>=1?result+"X":'1.00'}</h1>
         <div style={{width:"100px", height:"100px", borderRadius:"100%", padding:"4px", marginLeft:"25%",  background: "linear-gradient(to right, red, purple)"}} className={`buttonStart ${loading}`}>
         <div onClick={handleClick}  style={{width:"100%",  height:"100%",  display:"grid", alignContent:"center",  justifyContent:"center", color:"#fff", background:"#9ca3a9b8" ,borderRadius:"50%"}}>START</div>
         </div>
+
 </div>
+<a href="https://blaze.com/r/2BQ9QB">Clique aqui e abra sua conta Blaze</a>
         </div>      
       </main>
     </>

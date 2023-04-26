@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 export default async function dataset(req, res) {
 
-  const db = dataBase("/tmp/db").connection
+  const db = dataBase("db").connection
 
  
   if(req.method == "POST"){
@@ -40,39 +40,63 @@ export default async function dataset(req, res) {
   async function TrainAndPredict(arr){
   
       const lbl = []
-      const arrData = chunkArray(arr.sort((a,b)=>new Date(a.created_at).getTime() - new Date(a.created_at).getTime()).map(e=>parseFloat(e.crash_point)),6).map(e=>{
+      const arrData = chunkArray(arr.map(e=>parseFloat(e.crash_point)),22).map(e=>{
         let result = e.pop()
+        e.pop()
         lbl.push(result)
         return e    
       })
     console.log(arrData)
     console.log(lbl)
     
-      const data = tf.tensor2d(arrData.slice(0, -1))
-      const labels = tf.tensor1d(lbl.slice(0, -1));
+      const data = tf.tensor2d(arrData.slice(0, -1).map(e=>{
+        return e.map(e=>parseFloat(e))
+      }))
+
+      arrData.slice(0, -1).map(e=>{
+        return e.map(e=>parseInt(`${e}`.split('.')[0]))
+      }).forEach
+
+
+
+
+
+      const labels = tf.tensor1d(lbl.slice(0, -1).map(e=>parseInt(e)));
       
       // Agrupe os dados e rótulos em lotes de tamanho 6.
       
       // Defina o modelo com uma camada densa.
-      //const model = tf.sequential();
-      //model.add(tf.layers.dense({units: 1, inputShape: [5]}));
+      
       const model = tf.sequential({
-        layers: [
-          tf.layers.dense({ inputShape: [5], units: 32, activation: 'relu' }),
-          tf.layers.dense({ units: 1}),
-        ]
+      layers: [
+        tf.layers.dense({inputShape: [20], units: 32, activation: 'relu'}),
+        tf.layers.dense({units: 1}),
+        
+      ]
       });
-      model.compile({loss: 'meanSquaredError', optimizer: "Adamax"});
-      //model.compile({ optimizer: tf.train.adam(0.0031441251), loss: 'meanSquaredError' });
-    
-      // Treine o modelo com cada lote.
-      await model.fit(data, labels, {epochs: 72});
+
+      function onBatchEnd(batch, logs) {
+      console.log('Precisão', logs.acc);
+      }
+
+      model.compile({loss: 'meanSquaredError', optimizer: 'adam', metrics: ['accuracy']});
+      let prec = 0
+// Treina por 5 épocas com tamanho de lote 32.
+     await model.fit(data, labels, {
+        epochs: 30,
+        batchSize:32,
+        callbacks: {onBatchEnd}
+      }).then(info => {
+        console.log('Precisão final', info.history.acc);
+        prec = info.history.acc[0]
+      });
+
+
      
-      // Use o modelo para fazer previsões.
-      const testData = tf.tensor2d([arr.slice(0,5).map(e =>parseFloat(e.crash_point))]);
+      const testData = tf.tensor2d([arr.slice(0,20).map(e =>parseFloat(e.crash_point))]);
       const predictions = model.predict(testData);
       console.log(predictions.dataSync())
-      return {response:predictions.dataSync()[0]}
+      return {response:predictions.dataSync()[0]*prec}
     }
 
 

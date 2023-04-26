@@ -36,7 +36,7 @@ export const insertRows = (db, table, data)=>{
     const columnsLayout = Object.keys(data[0]).map(e=>"?").join(',')
     db.serialize(() => {
         const stmt = db.prepare(`INSERT INTO ${table} (${columns}) VALUES (${columnsLayout})`);
-        console.log(`INSERT INTO ${table} (${columns}) VALUES (${columnsLayout})`)
+        console.log(`INSERT IGNORE ${table} (${columns}) VALUES (${columnsLayout})`)
         data.forEach(element => {
             stmt.run(Object.values(element).map(e=>isObject(e)?JSON.stringify(e):e)) 
         });
