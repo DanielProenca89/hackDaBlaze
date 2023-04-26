@@ -14,15 +14,21 @@ export default function Home() {
 
   const [loading, setLoadingClass] = useState("")
   const [result, setResult] = useState(0)
-
+  const [lastResult, setLast] = useState("")
 
   const handleClick = async ()=>{
+    try{
     setLoadingClass("loading")
     const res = await fetch('api/dataset')
     const json = await res.json()
     const float  = parseFloat(json.response).toFixed(2)
     setResult(float)
+    setLast(json.lastResult)
     setLoadingClass("")
+    }catch{
+      setLoadingClass("")
+      
+    }
   }
  
 
@@ -49,6 +55,8 @@ export default function Home() {
 
 </div>
 <a href="https://blaze.com/r/2BQ9QB">Clique aqui e abra sua conta Blaze</a>
+
+Ultimo resultado:{lastResult}
         </div>      
       </main>
     </>

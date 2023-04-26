@@ -14,8 +14,7 @@ export default async function dataset(req, res) {
     const data = JSON.parse(req.body)
     createTable(db,"dataset",data[0],false,["id"])
     insertRows(db,"dataset",data)
-    const response = await getResults(db,"dataset","")
-    res.status(200).json(response)
+    res.status(200)
 
     /*const response = await getData()
 
@@ -96,7 +95,7 @@ export default async function dataset(req, res) {
       const testData = tf.tensor2d([arr.slice(0,20).map(e =>parseFloat(e.crash_point))]);
       const predictions = model.predict(testData);
       console.log(predictions.dataSync())
-      return {response:predictions.dataSync()[0]*prec}
+      return {response:predictions.dataSync()[0]*prec, lastResult:arr[0].created_at}
     }
 
 
