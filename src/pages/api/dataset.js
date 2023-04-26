@@ -107,12 +107,15 @@ const getApiData= async (startDate, endDate, page=1)=>{
       return {response:predictions.dataSync()[0]*prec, lastResult:arr[0].created_at}
     }
 
+    try{
     const now = new Date().toISOString().split('T')[0]
     const dataset = await getApiData(now, now)
     const result = await TrainAndPredict(dataset)
 
     res.status(200).json(result)
-
+    }catch(error){
+    res.send(error)
+    }
 
   }
   
