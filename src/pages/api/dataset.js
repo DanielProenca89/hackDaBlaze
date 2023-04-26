@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 export default async function dataset(req, res) {
 
-  const db = dataBase("db").connection
+  const db = dataBase("/tmp/db").connection
 
  
   if(req.method == "POST"){
