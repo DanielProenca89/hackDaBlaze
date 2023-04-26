@@ -7,7 +7,7 @@ import _ from 'lodash'
 
 export default async function dataset(req, res) {
 
-  const db = dataBase("/tmp/db").connection
+  /*const db = dataBase("/tmp/db").connection
 
  
   if(req.method == "POST"){
@@ -19,10 +19,19 @@ export default async function dataset(req, res) {
     /*const response = await getData()
 
     res.status(200).json(response)
-    toJsonFile(data, "inputs")*/
+    toJsonFile(data, "inputs")
     db.close()
-    }
+  }*/
 
+const getApiData= async (startDate, endDate, page=1)=>{
+    try{
+    const res = await fetch(`https://blaze.com/api/crash_games/history?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`,{credentials: "include"})
+    const json = await res.json()
+    return json.records
+    }catch{
+        return []
+    }
+}
 
   if(req.method == "GET"){
 
@@ -98,13 +107,12 @@ export default async function dataset(req, res) {
       return {response:predictions.dataSync()[0]*prec, lastResult:arr[0].created_at}
     }
 
-
-    const dataset = await getResults(db,"dataset","")
-    console.log(dataset)
+    const now = new Date().toISOString().split('T')[0]
+    const dataset = await getApiData(now, now)
     const result = await TrainAndPredict(dataset)
 
     res.status(200).json(result)
-    db.close()
+
 
   }
   
