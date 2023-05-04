@@ -38,7 +38,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
     redirect: 'follow'})
 
     const json = await res.json()
-    console.log(json)
+
     return json.records
 
     }catch(error){
@@ -62,13 +62,14 @@ const getApiData= async (startDate, endDate, page=1)=>{
   async function TrainAndPredict(arr){
   
       const lbl = []
-      const arrData = chunkArray(arr.map(e=>parseFloat(e.crash_point)),22).map(e=>{
+
+      const arrData = chunkArray(arr.map(e=>[parseFloat(e.crash_point), new Date(e.created_at).getTime()]),22).map(e=>{
         let result = e.pop()
         e.pop()
         lbl.push(result)
         return e    
       })
-    console.log(arrData)
+ 
     console.log(lbl)
     
       const data = tf.tensor2d(arrData.slice(0, -1).map(e=>{
@@ -83,7 +84,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
 
 
 
-      const labels = tf.tensor1d(lbl.slice(0, -1).map(e=>parseInt(e)));
+      const labels = tf.tensor2d(lbl.slice(0,13))
       
       // Agrupe os dados e rótulos em lotes de tamanho 6.
       
@@ -92,7 +93,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
       const model = tf.sequential({
       layers: [
         tf.layers.dense({inputShape: [20], units: 32, activation: 'relu'}),
-        tf.layers.dense({units: 1}),
+        tf.layers.dense({units: 2}),
         
       ]
       });
@@ -101,12 +102,12 @@ const getApiData= async (startDate, endDate, page=1)=>{
       console.log('Precisão', logs.acc);
       }
 
-      model.compile({loss: 'meanSquaredError', optimizer: 'adam', metrics: ['accuracy']});
+      model.compile({loss: 'meanSquaredError', optimizer: 'adamax', metrics: ['accuracy']});
       let prec = 0
 // Treina por 5 épocas com tamanho de lote 32.
      await model.fit(data, labels, {
         epochs: 30,
-        batchSize:32,
+        batchSize:64,
         callbacks: {onBatchEnd}
       }).then(info => {
         console.log('Precisão final', info.history.acc);
@@ -118,7 +119,8 @@ const getApiData= async (startDate, endDate, page=1)=>{
       const testData = tf.tensor2d([arr.slice(0,20).map(e =>parseFloat(e.crash_point))]);
       const predictions = model.predict(testData);
       console.log(predictions.dataSync())
-      return {response:predictions.dataSync()[0]*prec, lastResult:arr[0].created_at}
+
+      return {response:predictions.dataSync()[0]*prec, data:predictions.dataSync()[1]}
     }
 
     try{
@@ -127,7 +129,9 @@ const getApiData= async (startDate, endDate, page=1)=>{
     const result = await TrainAndPredict(dataset)
 
     res.send(result)
+    console.log(result)
     }catch(error){
+      console.log(error)
     res.send(error)
     }
 
