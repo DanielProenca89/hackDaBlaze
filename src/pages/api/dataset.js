@@ -63,7 +63,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
   
       const lbl = []
 
-      const arrData = chunkArray(arr.map(e=>[parseFloat(e.crash_point), new Date(e.created_at).getTime()]),22).map(e=>{
+      const arrData = chunkArray(arr.sort((a,b)=>new Date(a.created_at) - new Date(b.created_at)).map(e=>[parseFloat(e.crash_point), new Date(e.created_at).getTime()]),22).map(e=>{
         let result = e.pop()
         e.pop()
         lbl.push(result)
