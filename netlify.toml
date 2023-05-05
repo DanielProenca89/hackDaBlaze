@@ -1,4 +1,4 @@
-[[headers]]
- for = "/*"
- [headers.value]
-   Referrer-Policy = "strict-origin-when-cross-origin"
+[build]
+  command   = "npm run build"
+  functions = "out_functions"
+  publish   = "out_publish"
