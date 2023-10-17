@@ -22,7 +22,7 @@ export default async function dataset(req, res) {
   }*/
 
 const getApiData= async (startDate, endDate, page=1)=>{
-    #var myHeaders = new Headers();
+    /*var myHeaders = new Headers();
     #myHeaders.append("Cookie", "s=eo112rjm8c71ecsl9qphbl46hj");
 
     #var formdata = new FormData();
@@ -31,7 +31,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
     #formdata.append("allowCookies", "1");
     #formdata.append("encodeURL", "0");
     try{
-    /*const res = await fetch(`https://hackdocrash.netlify.app/blaze`,
+    const res = await fetch(`https://hackdocrash.netlify.app/blaze`,
     {method: 'POST',
     headers: myHeaders,
     body: formdata,
