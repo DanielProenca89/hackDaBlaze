@@ -35,7 +35,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
     {method: 'POST',
     headers: myHeaders,
     body: formdata,
-    redirect: 'follow'})*/
+    redirect: 'follow'})
   
 
     const json = await res.json()
