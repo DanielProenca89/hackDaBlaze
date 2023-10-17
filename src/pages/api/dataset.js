@@ -22,20 +22,22 @@ export default async function dataset(req, res) {
   }*/
 
 const getApiData= async (startDate, endDate, page=1)=>{
-    var myHeaders = new Headers();
-    myHeaders.append("Cookie", "s=eo112rjm8c71ecsl9qphbl46hj");
+    #var myHeaders = new Headers();
+    #myHeaders.append("Cookie", "s=eo112rjm8c71ecsl9qphbl46hj");
 
-    var formdata = new FormData();
-    formdata.append("u", `https://blaze.com/api/crash_games/history?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`);
-    formdata.append("proxy_formdata_server", "de");
-    formdata.append("allowCookies", "1");
-    formdata.append("encodeURL", "0");
+    #var formdata = new FormData();
+    #formdata.append("u", `https://blaze.com/api/crash_games/history?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`);
+    #formdata.append("proxy_formdata_server", "de");
+    #formdata.append("allowCookies", "1");
+    #formdata.append("encodeURL", "0");
     try{
-    const res = await fetch(`https://hackdocrash.netlify.app/blaze`,
+    /*const res = await fetch(`https://hackdocrash.netlify.app/blaze`,
     {method: 'POST',
     headers: myHeaders,
     body: formdata,
-    redirect: 'follow'})
+    redirect: 'follow'})*/
+
+    const res = await fetch(`https://blaze.com/api/crash_games/history?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`)
 
     const json = await res.json()
 
