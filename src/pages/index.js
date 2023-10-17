@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react'
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
 
 
-const inter = Inter({ subsets: ['latin'] })
+
 
 
 
@@ -44,7 +43,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={`${styles.main}`}>
       <div style={{display:"grid", alignContent:"center", justifyContent:"center"}}>
         <h1 style={{color:"aliceblue", textAlign:"center", top:0}}>Crash Hack</h1>
         <div style={{textAlign:"center",  padding:"1em" ,width:"100%", height:"100%", display:"grid"}}>
