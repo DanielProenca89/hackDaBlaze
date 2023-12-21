@@ -30,7 +30,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
     formdata.append("proxy_formdata_server", "de");
     formdata.append("allowCookies", "1");
     formdata.append("encodeURL", "0");
-    try{
+    
     const res = await fetch(`https://de.hideproxy.me/includes/process.php?action=update`,
     {method: 'POST',
     headers: myHeaders,
@@ -42,12 +42,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
     console.log(json)
     return json.records
     
-    }catch(error){
-      console.log(error)
-        
-      return error
-        
-    }
+
 }
 
   if(req.method == "GET"){
