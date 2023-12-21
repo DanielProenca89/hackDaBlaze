@@ -55,7 +55,7 @@ export default function Home() {
         </div>
 
 </div>
-<a href="blaze-4.com/r/2BQ9QB">Clique aqui e abra sua conta Blaze</a>
+<a href="https://blaze-4.com/r/2BQ9QB">Clique aqui e abra sua conta Blaze</a>
 
 Ultimo resultado:{lastResult}
         </div>      
