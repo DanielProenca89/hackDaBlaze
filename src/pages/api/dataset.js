@@ -26,7 +26,7 @@ const getApiData= async (startDate, endDate, page=1)=>{
     myHeaders.append("Cookie", "s=eo112rjm8c71ecsl9qphbl46hj");
 
     var formdata = new FormData();
-    formdata.append("u", `https://blaze.com/api/crash_games/history?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`);
+    formdata.append("u", `https://blaze-4.com/api/crash_games/history?startDate=${startDate}T00:00:00.000Z&endDate=${endDate}T23:59:59.999Z&page=${page}`);
     formdata.append("proxy_formdata_server", "de");
     formdata.append("allowCookies", "1");
     formdata.append("encodeURL", "0");
